@@ -1,0 +1,10 @@
+.mars-color{
+    background-color: #9b4308;  
+}
+
+.jumbotron {
+    background-size: cover;
+    background-attachment: center;
+    background-position: center;
+    background-repeat: no-repeat;
+}

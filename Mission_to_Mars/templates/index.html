@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/style.css" type='text/css'>
+
+    <title>Mission to Mars</title>
+</head>
+
+<body style="background-color: rgb(216, 136, 62)" style="color: black">
+    <div class="container">
+
+        <!-- Jumbotron with button -->
+        <div class="jumbotron text-center object-fit: contain" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/PIA23302-FirstHumansOnMars-ArtistConcept.jpg/800px-PIA23302-FirstHumansOnMars-ArtistConcept.jpg')">
+            <h1><strong>MISSION TO MARS</strong></h1>
+            <p><a class="btn btn-primary btn-lg mars-color" href="/scrape" role="button">SCRAPE NEW DATA</a></p>
+        </div>
+
+        <!-- News area -->
+        <div class="container">
+            <div class="col-md-12">
+                <h3><strong>LATEST MARS NEWS</strong></h3>
+                {% if mars is not none %}
+                <h6>{{ mars.news.news_title }}</h6>
+                <p>{{ mars.news.news_text }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <!-- Info area -->
+        <div class="container">
+            <div class="row">
+                <!-- Image area -->
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <h3><strong>FEATURED MARS IMAGE</strong></h3>
+                    {% if mars is not none %}
+                    <img src="{{ mars.image.image_url }}" style="max-width:100%; max-height: auto;" alt="Mars Featured Image">
+                    {% endif %}
+                </div>
+                <!-- Weather card and table -->
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="card mars-color" style="width: 18rem;">
+                        <div class="card-body mars-color">
+                        <h3 class="card-title"><strong>CURRENT WEATHER ON MARS</strong></h3>
+                        {% if mars is not none %}
+                        <p class="card-text">{{ mars.weather.weather_text }}</p>
+                        {% endif %}
+                        </div>
+                        <br>
+                        <h3><strong>MARS FACTS</strong></h3>
+                        <div style="max-width: 450px; max-height: 325px; font-size: 15px; margin-bottom: 65px;">
+                            {% if mars is not none %}
+                            {{ mars.facts|safe }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hemisphere images -->
+        <h3 style="padding-top: 50px; margin-top: 100px; text-align: center;"><strong>MARS HEMISPHERES</strong></h3>
+        <div class="card-deck">
+            <hr>
+            <div class="col-md-12">
+                <div class="row">
+                    {% if mars is not none %}
+                    {% for item in mars.hemi %}
+                    <div class="col-md-6">
+                        <div class="card mars-color" style="margin: 30px;">
+                            <img class="card-img-top" src="{{ item.hemi_image }}" alt='hemisphere image'/>
+                            <div class="card-body">
+                                <p class="card-text">{{ item.title }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
